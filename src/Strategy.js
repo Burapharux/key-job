@@ -44,13 +44,13 @@ class UpdateSheetStrategy extends Strategy {
     const editedColumn = e.range.getColumn();
     
     // Check if the edited column is the target column
-    if (editedColumn === targetColumn) {
+    if (editedColumn === statusColumnIndex) {
       // Get the whole row as an array
       const rowData = sheet.getRange(editedRow, 1, 1, sheet.getLastColumn()).getValues()[0];
       
       // Log the entire row data
-      Logger.log('Edited Row Data: ' + rowData[summaryColumn - 1]); // Adjust for zero-based index
-      return "มีการเปลี่ยนแปลงสถานะของ: " + rowData[summaryColumn - 1] + "เป็นสถานะ " + rowData[targetColumn - 1];
+      Logger.log('Edited Row Data: ' + rowData[problemTitleColumnIndex - 1]); // Adjust for zero-based index
+      return "มีการเปลี่ยนแปลงสถานะของ: " + rowData[problemTitleColumnIndex - 1] + "เป็นสถานะ " + rowData[statusColumnIndex - 1];
       
     }
     return undefined; // No action if the edited column is not the target column

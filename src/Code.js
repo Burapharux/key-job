@@ -3,21 +3,21 @@ const token = PropertiesService.getScriptProperties().getProperty('LINE_CHANNEL_
 const groupId = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID');
 const sheetId = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
 const sheetName = PropertiesService.getScriptProperties().getProperty('SHEET_NAME');
-const summaryCellName = PropertiesService.getScriptProperties().getProperty('SUMMARY_CELL_NAME');
-const targetColumn = Number(PropertiesService.getScriptProperties().getProperty('TARGET_COLUMN'));
-const summaryColumn = Number(PropertiesService.getScriptProperties().getProperty('SUMMARY_COLUMN'));
-const departmentCellName = PropertiesService.getScriptProperties().getProperty('DEPARTMENT_CELL_NAME');
+const problemTitleCellName = PropertiesService.getScriptProperties().getProperty('PROBLEM_TITLE_CELL_NAME');
+const statusColumnIndex = Number(PropertiesService.getScriptProperties().getProperty('STATUS_COLUMN'));
+const problemTitleColumnIndex = Number(PropertiesService.getScriptProperties().getProperty('PROBLEM_TITLE_COLUMN'));
+const placeCellName = PropertiesService.getScriptProperties().getProperty('PLACE_CELL_NAME');
+const formId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
 
 let notifier;
 let lineSubscriber;
 
 // Setup a trigger
 function createFormSubmitTrigger() {
-  let form = FormApp.getActiveForm();
   let triggers = ScriptApp.getProjectTriggers();
   if (triggers.length > 0) return console.log("Please remove existing triggers before creating a new one.");
 
-  ScriptApp.newTrigger("wrappedOnFormSubmit").forForm(form).onFormSubmit().create();
+  ScriptApp.newTrigger("wrappedOnFormSubmit").forForm(FormApp.openById(formId)).onFormSubmit().create();
   console.log("Ran the createFormSubmitTrigger");
 }
 
@@ -50,10 +50,10 @@ function setUpNotifiers() {
 function wrappedOnFormSubmit(e) {
   setUpNotifiers();
   const bugReportFormConfig = {
-  outputTemplate: "New error reported: {{title}} (Department: {{department}})",
+  outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}",
   fieldMap: {
-    title: summaryCellName,        // Maps 'title' placeholder to the form field 'Summary'
-    department: departmentCellName // Maps 'department' placeholder to the form field 'Department'
+    title: problemTitleCellName,        // Maps 'title' placeholder to the form field 'Summary'
+    room: placeCellName // Maps 'department' placeholder to the form field 'Department'
   }
 };
   notifier.setStrategy(new NewFormSubmissionStrategy(bugReportFormConfig));
