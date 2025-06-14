@@ -50,19 +50,28 @@ function setUpNotifiers() {
 function wrappedOnFormSubmit(e) {
   setUpNotifiers();
   const bugReportFormConfig = {
-  outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}",
-  fieldMap: {
-    title: problemTitleCellName,        // Maps 'title' placeholder to the form field 'Summary'
-    room: placeCellName // Maps 'department' placeholder to the form field 'Department'
-  }
-};
+    outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}",
+    fieldMap: {
+      title: problemTitleCellName,        // Maps 'title' placeholder to the form field 'Summary'
+      room: placeCellName // Maps 'department' placeholder to the form field 'Department'
+    }
+  };
   notifier.setStrategy(new NewFormSubmissionStrategy(bugReportFormConfig));
   notifier.executeStrategy(e);
 }
 
 function onEditTriggerHandler(e) {
   setUpNotifiers();
-  notifier.setStrategy(new UpdateSheetStrategy());
+  const updateSheetConfig = {
+    outputTemplate: "อัพเดตงาน {{title}} ของห้อง/ตึก {{place}} เป็นสถานะ {{status}}",
+    fieldMap: {
+      title: problemTitleColumnIndex,   // Column index for the problem title (1-based)
+      place: 4,             // Maps 'place' placeholder to the form field 'Place'
+      status: statusColumnIndex   // Column index for the status (1-based)
+    },
+    targetColumn: statusColumnIndex // The column index that triggers the strategy (1-based)
+  };
+  notifier.setStrategy(new UpdateSheetStrategy(updateSheetConfig));
   notifier.executeStrategy(e);
 }
 
