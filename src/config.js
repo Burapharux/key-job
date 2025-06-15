@@ -9,7 +9,10 @@ const itSupportFormConfig = {
     fieldMap: {
         title: problemTitleCellName,        // Maps 'title' placeholder to the form field 'Summary'
         room: placeCellName // Maps 'department' placeholder to the form field 'Department'
-    }
+    },
+    sheetId: PropertiesService.getScriptProperties().getProperty('SHEET_ID'), // The ID of the Google Sheet
+    sheetName: PropertiesService.getScriptProperties().getProperty('SHEET_NAME'), // The name of the Google Sheet
+    formId: PropertiesService.getScriptProperties().getProperty('FORM_ID') // The ID of the Google Form
 };
 
 const itSupportUpdateSheetConfig = {
@@ -19,5 +22,7 @@ const itSupportUpdateSheetConfig = {
         place: 4,             // Maps 'place' placeholder to the form field 'Place'
         status: statusColumnIndex   // Column index for the status (1-based)
     },
-    targetColumn: statusColumnIndex // The column index that triggers the strategy (1-based)
+    targetColumn: statusColumnIndex, // The column index that triggers the strategy (1-based)
+    sheetId: PropertiesService.getScriptProperties().getProperty('SHEET_ID'), // The ID of the Google Sheet
+    sheetName: PropertiesService.getScriptProperties().getProperty('SHEET_NAME') // The name of the Google Sheet
 };

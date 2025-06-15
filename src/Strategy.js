@@ -9,8 +9,8 @@ class NewFormSubmissionStrategy extends Strategy {
     super();
     this.outputTemplate = config.outputTemplate;
     this.fieldMap = config.fieldMap;
-    this.sheet = SpreadsheetApp.openById(sheetId);
-    this.sheetObj = this.sheet.getSheetByName(sheetName);
+    this.sheet = SpreadsheetApp.openById(config.sheetId);
+    this.sheetObj = this.sheet.getSheetByName(config.sheetName);
   }
 
   static getReducedItemResponses(itemResponses) {
