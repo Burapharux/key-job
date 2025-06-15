@@ -1,9 +1,6 @@
 // Load environment variables (simulating a .env)
 const token = PropertiesService.getScriptProperties().getProperty('LINE_CHANNEL_ACCESS_TOKEN');
 const groupId = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID');
-// const sheetId = PropertiesService.getScriptProperties().getProperty('SHEET_ID');
-// const sheetName = PropertiesService.getScriptProperties().getProperty('SHEET_NAME');
-// const formId = PropertiesService.getScriptProperties().getProperty('FORM_ID');
 
 let notifier;
 let lineSubscriber;
