@@ -7,11 +7,6 @@ let lineSubscriber;
 
 // Setup a trigger for form submission
 function createItServiceFormSubmitTrigger() {
-  const triggers = ScriptApp.getProjectTriggers();
-  if (triggers.length > 0) {
-    console.log("Please remove existing triggers before creating a new one.");
-    return;
-  }
   ScriptApp.newTrigger("onFormSubmitItServiceTriggerHandler")
     .forForm(FormApp.openById(itSupportFormConfig.formId))
     .onFormSubmit()
@@ -21,15 +16,24 @@ function createItServiceFormSubmitTrigger() {
 
 // Setup a trigger for sheet edit
 function createItServiceSheetEditTrigger() {
-  const triggers = ScriptApp.getProjectTriggers();
-  for (const trigger of triggers) {
-    if (trigger.getHandlerFunction() === 'onEditItServiceTriggerHandler') {
-      Logger.log('Trigger already exists. Skipping creation.');
-      return;
-    }
-  }
   ScriptApp.newTrigger('onEditItServiceTriggerHandler')
     .forSpreadsheet(SpreadsheetApp.openById(itSupportUpdateSheetConfig.sheetId))
+    .onEdit()
+    .create();
+  Logger.log('Trigger created successfully.');
+}
+
+function createCleaningServiceFormSubmitTrigger() {
+  ScriptApp.newTrigger("onFormSubmitCleaningServiceTriggerHandler")
+    .forForm(FormApp.openById(cleaningServiceFormConfig.formId))
+    .onFormSubmit()
+    .create();
+  console.log("Ran the createCleaningServiceFormSubmitTrigger");
+}
+
+function createCleaningServiceSheetEditTrigger() {
+  ScriptApp.newTrigger('onEditCleaningServiceTriggerHandler')
+    .forSpreadsheet(SpreadsheetApp.openById(cleaningServiceUpdateSheetConfig.sheetId))
     .onEdit()
     .create();
   Logger.log('Trigger created successfully.');
@@ -56,9 +60,28 @@ function onEditItServiceTriggerHandler(e) {
   notifier.executeStrategy(e);
 }
 
+function onFormSubmitCleaningServiceTriggerHandler(e) {
+  setUpNotifiers();
+  notifier.setStrategy(new NewFormSubmissionStrategy(cleaningServiceFormConfig));
+  notifier.executeStrategy(e);
+}
+
+function onEditCleaningServiceTriggerHandler(e) {
+  setUpNotifiers();
+  notifier.setStrategy(new UpdateSheetStrategy(cleaningServiceUpdateSheetConfig));
+  notifier.executeStrategy(e);
+}
+
 // Setup function to initialize everything
 function setup() {
   setUpNotifiers();
+  // Delete existing triggers to avoid duplicates
+  const triggers = ScriptApp.getProjectTriggers();
+  triggers.forEach(trigger => {
+    ScriptApp.deleteTrigger(trigger);
+  });
+  createCleaningServiceFormSubmitTrigger();
+  createCleaningServiceSheetEditTrigger();
   createItServiceFormSubmitTrigger();
   createItServiceSheetEditTrigger();
   console.log("Setup completed. Triggers created for form submission and onEdit events.");

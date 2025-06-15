@@ -27,3 +27,26 @@ const itSupportUpdateSheetConfig = {
     sheetId: PropertiesService.getScriptProperties().getProperty('SHEET_ID'), // The ID of the Google Sheet
     sheetName: PropertiesService.getScriptProperties().getProperty('SHEET_NAME') // The name of the Google Sheet
 };
+
+const cleaningServiceFormConfig = {
+    outputTemplate: "ได้รับการแจ้งต่อแผนกแม่บ้าน: {{title}} ที่: {{room}}",
+    fieldMap: {
+        title: "B1",        // Maps 'title' placeholder to the form field 'Summary'
+        room: "C1" // Maps 'department' placeholder to the form field 'Department'
+    },
+    sheetId: PropertiesService.getScriptProperties().getProperty('SHEET_ID_CLEANING'), // The ID of the Google Sheet
+    sheetName: PropertiesService.getScriptProperties().getProperty('SHEET_NAME_CLEANING'), // The name of the Google Sheet
+    formId: PropertiesService.getScriptProperties().getProperty('FORM_ID_CLEANING') // The ID of the Google Form
+};
+
+const cleaningServiceUpdateSheetConfig = {
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{place}} เป็นสถานะ {{status}}",
+    fieldMap: {
+        title: 2,   // Column index for the problem title (1-based)
+        place: 3,             // Maps 'place' placeholder to the form field 'Place'
+        status: 6   // Column index for the status (1-based)
+    },
+    targetColumn: 6, // The column index that triggers the strategy (1-based)
+    sheetId: PropertiesService.getScriptProperties().getProperty('SHEET_ID_CLEANING'), // The ID of the Google Sheet
+    sheetName: PropertiesService.getScriptProperties().getProperty('SHEET_NAME_CLEANING')
+};
