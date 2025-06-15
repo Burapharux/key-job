@@ -5,56 +5,61 @@ const groupId = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_
 let notifier;
 let lineSubscriber;
 
-// Setup a trigger
-function createFormSubmitTrigger() {
-  let triggers = ScriptApp.getProjectTriggers();
-  if (triggers.length > 0) return console.log("Please remove existing triggers before creating a new one.");
-
-  ScriptApp.newTrigger("wrappedOnFormSubmit").forForm(FormApp.openById(itSupportFormConfig.formId)).onFormSubmit().create();
+// Setup a trigger for form submission
+function createItServiceFormSubmitTrigger() {
+  const triggers = ScriptApp.getProjectTriggers();
+  if (triggers.length > 0) {
+    console.log("Please remove existing triggers before creating a new one.");
+    return;
+  }
+  ScriptApp.newTrigger("onFormSubmitItServiceTriggerHandler")
+    .forForm(FormApp.openById(itSupportFormConfig.formId))
+    .onFormSubmit()
+    .create();
   console.log("Ran the createFormSubmitTrigger");
 }
 
-function createSheetEditTrigger() {
-  // Check if the trigger already exists to avoid duplicates
+// Setup a trigger for sheet edit
+function createItServiceSheetEditTrigger() {
   const triggers = ScriptApp.getProjectTriggers();
   for (const trigger of triggers) {
-    if (trigger.getHandlerFunction() === 'onEditTriggerHandler') {
+    if (trigger.getHandlerFunction() === 'onEditItServiceTriggerHandler') {
       Logger.log('Trigger already exists. Skipping creation.');
-      return; // Exit if this trigger already exists
+      return;
     }
   }
-  
-  // Create the trigger for the onEdit event
-  ScriptApp.newTrigger('onEditTriggerHandler')
-           .forSpreadsheet(SpreadsheetApp.openById(itSupportUpdateSheetConfig.sheetId)) // Set the trigger for the specific spreadsheet
-           .onEdit()
-           .create();
-  
+  ScriptApp.newTrigger('onEditItServiceTriggerHandler')
+    .forSpreadsheet(SpreadsheetApp.openById(itSupportUpdateSheetConfig.sheetId))
+    .onEdit()
+    .create();
   Logger.log('Trigger created successfully.');
 }
 
+// Initialize notifiers and subscribers
 function setUpNotifiers() {
   notifier = new Notifier();
   lineSubscriber = new LineSubscriber(token, groupId);
   notifier.subscribe(lineSubscriber);
 }
 
-// Wrapper function to handle form submission
-function wrappedOnFormSubmit(e) {
+// Wrapper for form submission event
+function onFormSubmitItServiceTriggerHandler(e) {
   setUpNotifiers();
   notifier.setStrategy(new NewFormSubmissionStrategy(itSupportFormConfig));
   notifier.executeStrategy(e);
 }
 
-function onEditTriggerHandler(e) {
+// Handler for sheet edit event
+function onEditItServiceTriggerHandler(e) {
   setUpNotifiers();
   notifier.setStrategy(new UpdateSheetStrategy(itSupportUpdateSheetConfig));
   notifier.executeStrategy(e);
 }
 
+// Setup function to initialize everything
 function setup() {
   setUpNotifiers();
-  createFormSubmitTrigger();
-  createSheetEditTrigger();
+  createItServiceFormSubmitTrigger();
+  createItServiceSheetEditTrigger();
   console.log("Setup completed. Triggers created for form submission and onEdit events.");
 }
