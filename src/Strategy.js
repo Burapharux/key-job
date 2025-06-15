@@ -55,6 +55,5 @@ class UpdateSheetStrategy extends Strategy {
       }
       return output;
     }
-    return undefined;
   }
 }
