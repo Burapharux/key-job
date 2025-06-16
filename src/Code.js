@@ -1,7 +1,4 @@
-// Load environment variables (simulating a .env)
-const token = PropertiesService.getScriptProperties().getProperty('LINE_CHANNEL_ACCESS_TOKEN');
-const groupId = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID');
-
+// Load environment variables 
 let notifier;
 let lineSubscriber;
 
@@ -40,7 +37,8 @@ function createCleaningServiceSheetEditTrigger() {
 }
 
 // Initialize notifiers and subscribers
-function setUpNotifiers() {
+// Do not hesitate to modify this function if more subscribers are needed
+function setUpNotifiers(token, groupId) {
   notifier = new Notifier();
   lineSubscriber = new LineSubscriber(token, groupId);
   notifier.subscribe(lineSubscriber);
@@ -48,26 +46,26 @@ function setUpNotifiers() {
 
 // Wrapper for form submission event
 function onFormSubmitItServiceTriggerHandler(e) {
-  setUpNotifiers();
+  setUpNotifiers(itSupportLineConfig.token, itSupportLineConfig.groupId);
   notifier.setStrategy(new NewFormSubmissionStrategy(itSupportFormConfig));
   notifier.executeStrategy(e);
 }
 
 // Handler for sheet edit event
 function onEditItServiceTriggerHandler(e) {
-  setUpNotifiers();
+  setUpNotifiers(itSupportLineConfig.token, itSupportLineConfig.groupId);
   notifier.setStrategy(new UpdateSheetStrategy(itSupportUpdateSheetConfig));
   notifier.executeStrategy(e);
 }
 
 function onFormSubmitCleaningServiceTriggerHandler(e) {
-  setUpNotifiers();
+  setUpNotifiers(cleaningServiceLineConfig.token, cleaningServiceLineConfig.groupId);
   notifier.setStrategy(new NewFormSubmissionStrategy(cleaningServiceFormConfig));
   notifier.executeStrategy(e);
 }
 
 function onEditCleaningServiceTriggerHandler(e) {
-  setUpNotifiers();
+  setUpNotifiers(cleaningServiceLineConfig.token, cleaningServiceLineConfig.groupId);
   notifier.setStrategy(new UpdateSheetStrategy(cleaningServiceUpdateSheetConfig));
   notifier.executeStrategy(e);
 }
