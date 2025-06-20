@@ -36,6 +36,14 @@ function createCleaningServiceSheetEditTrigger() {
   Logger.log('Trigger created successfully.');
 }
 
+function createFacilityServiceFormSubmitTrigger() {
+  ScriptApp.newTrigger("onFormSubmitFacilityServiceTriggerHandler")
+    .forForm(FormApp.openById(facilityServiceFormConfig.formId))
+    .onFormSubmit()
+    .create();
+  console.log("Ran the createFacilityServiceFormSubmitTrigger");
+}
+
 // Initialize notifiers and subscribers
 // Do not hesitate to modify this function if more subscribers are needed
 function setUpNotifiers(token, groupId) {
@@ -70,9 +78,14 @@ function onEditCleaningServiceTriggerHandler(e) {
   notifier.executeStrategy(e);
 }
 
+function onFormSubmitFacilityServiceTriggerHandler(e) {
+  setUpNotifiers(facilityServiceLineConfig.token, facilityServiceLineConfig.groupId);
+  notifier.setStrategy(new NewFormSubmissionStrategy(facilityServiceFormConfig));
+  notifier.executeStrategy(e);
+}
+
 // Setup function to initialize everything
 function setup() {
-  setUpNotifiers();
   // Delete existing triggers to avoid duplicates
   const triggers = ScriptApp.getProjectTriggers();
   triggers.forEach(trigger => {

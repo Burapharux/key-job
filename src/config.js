@@ -11,6 +11,11 @@ const sheetIdCleaning = PropertiesService.getScriptProperties().getProperty('SHE
 const sheetNameCleaning = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_CLEANING');
 const formIdCleaning = PropertiesService.getScriptProperties().getProperty('FORM_ID_CLEANING');
 
+const sheetIdFacility = PropertiesService.getScriptProperties().getProperty('SHEET_ID_FACILITY');
+const sheetNameFacility = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_FACILITY');
+const formIdFacility = PropertiesService.getScriptProperties().getProperty('FORM_ID_FACILITY');
+const groupIdFacility = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_FACILITY');
+
 const itSupportFormConfig = {
     outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}",
     fieldMap: {
@@ -65,4 +70,33 @@ const cleaningServiceUpdateSheetConfig = {
 const cleaningServiceLineConfig = {
     token: token,
     groupId: groupIdCleaning
+};
+
+const facilityServiceFormConfig = {
+    outputTemplate: "ได้รับการแจ้งต่อฝ่ายอาคารสถานที่: {{title}} ที่: {{place}}} โดย: {{requester}}",
+    fieldMap: {
+        title: "G1",
+        place: "H1",
+        requester: "D1"
+    },
+    sheetId: sheetIdCleaning,
+    sheetName: sheetNameCleaning,
+    formId: formIdCleaning
+};
+
+const facilityServiceUpdateSheetConfig = {
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{place}} เป็นสถานะ {{status}}",
+    fieldMap: {
+        title: 7,
+        place: 8,
+        status: 14
+    },
+    targetColumn: 14,
+    sheetId: sheetIdFacility,
+    sheetName: sheetNameFacility
+};
+
+const facilityServiceLineConfig = {
+    token: token,
+    groupId: groupIdFacility
 };
