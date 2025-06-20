@@ -16,6 +16,11 @@ const sheetNameFacility = PropertiesService.getScriptProperties().getProperty('S
 const formIdFacility = PropertiesService.getScriptProperties().getProperty('FORM_ID_FACILITY');
 const groupIdFacility = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_FACILITY');
 
+const sheedIdIR = PropertiesService.getScriptProperties().getProperty('SHEET_ID_IR');
+const sheetNameIR = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_IR');
+const formIdIR = PropertiesService.getScriptProperties().getProperty('FORM_ID_IR');
+const groupIdIR = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_IR');
+
 const itSupportFormConfig = {
     outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}",
     fieldMap: {
@@ -99,4 +104,33 @@ const facilityServiceUpdateSheetConfig = {
 const facilityServiceLineConfig = {
     token: token,
     groupId: groupIdFacility
+};
+
+const irServiceFormConfig = {
+    outputTemplate: "ได้รับการแจ้งต่อฝ่าย IR: {{title}} รายละเอียด: {{info}}} โดย: {{requester}}",
+    fieldMap: {
+        title: "B1",
+        info: "C1",
+        requester: "H1"
+    },
+    sheetId: sheedIdIR,
+    sheetName: sheetNameIR,
+    formId: formIdIR
+};
+
+const irServiceUpdateSheetConfig = {
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{info}} เป็นสถานะ {{status}}",
+    fieldMap: {
+        title: 2,
+        info: 3,
+        status: 9
+    },
+    targetColumn: 9,
+    sheetId: sheedIdIR,
+    sheetName: sheetNameIR
+};
+
+const irServiceLineConfig = {
+    token: token,
+    groupId: groupIdIR
 };
