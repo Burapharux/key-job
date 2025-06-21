@@ -78,7 +78,7 @@ const cleaningServiceLineConfig = {
 };
 
 const facilityServiceFormConfig = {
-    outputTemplate: "ได้รับการแจ้งต่อฝ่ายอาคารสถานที่: {{title}} ที่: {{place}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
+    outputTemplate: "ได้รับการแจ้งต่อฝ่ายอาคารสถานที่: {{title}} ที่: {{place}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
     fieldMap: {
         title: "G1",
         place: "H1",
