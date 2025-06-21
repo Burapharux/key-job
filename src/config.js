@@ -1,29 +1,136 @@
-const problemTitleCellName = PropertiesService.getScriptProperties().getProperty('PROBLEM_TITLE_CELL_NAME');
-const statusColumnIndex = Number(PropertiesService.getScriptProperties().getProperty('STATUS_COLUMN'));
-const problemTitleColumnIndex = Number(PropertiesService.getScriptProperties().getProperty('PROBLEM_TITLE_COLUMN'));
-const placeCellName = PropertiesService.getScriptProperties().getProperty('PLACE_CELL_NAME');
-const placeColumnIndex = 4;
+const token = PropertiesService.getScriptProperties().getProperty('LINE_CHANNEL_ACCESS_TOKEN');
+const groupIdIT = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_IT');
+const groupIdCleaning = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_CLEANING');
 
+// Extract sheet and form IDs/names once
+const sheetIdIT = PropertiesService.getScriptProperties().getProperty('SHEET_ID_IT');
+const sheetNameIT = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_IT');
+const formIdIT = PropertiesService.getScriptProperties().getProperty('FORM_ID_IT');
+
+const sheetIdCleaning = PropertiesService.getScriptProperties().getProperty('SHEET_ID_CLEANING');
+const sheetNameCleaning = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_CLEANING');
+const formIdCleaning = PropertiesService.getScriptProperties().getProperty('FORM_ID_CLEANING');
+
+const sheetIdFacility = PropertiesService.getScriptProperties().getProperty('SHEET_ID_FACILITY');
+const sheetNameFacility = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_FACILITY');
+const formIdFacility = PropertiesService.getScriptProperties().getProperty('FORM_ID_FACILITY');
+const groupIdFacility = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_FACILITY');
+
+const sheedIdIR = PropertiesService.getScriptProperties().getProperty('SHEET_ID_IR');
+const sheetNameIR = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_IR');
+const formIdIR = PropertiesService.getScriptProperties().getProperty('FORM_ID_IR');
+const groupIdIR = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_IR');
 
 const itSupportFormConfig = {
-    outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}",
+    outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdIT + "/edit?usp=sharing",
     fieldMap: {
-        title: problemTitleCellName,        // Maps 'title' placeholder to the form field 'Summary'
-        room: placeCellName // Maps 'department' placeholder to the form field 'Department'
+        title: 'B1',
+        room: 'D1'
     },
-    sheetId: PropertiesService.getScriptProperties().getProperty('SHEET_ID'), // The ID of the Google Sheet
-    sheetName: PropertiesService.getScriptProperties().getProperty('SHEET_NAME'), // The name of the Google Sheet
-    formId: PropertiesService.getScriptProperties().getProperty('FORM_ID') // The ID of the Google Form
+    sheetId: sheetIdIT,
+    sheetName: sheetNameIT,
+    formId: formIdIT
 };
 
 const itSupportUpdateSheetConfig = {
-    outputTemplate: "อัพเดตงาน {{title}} ของห้อง/ตึก {{place}} เป็นสถานะ {{status}}",
+    outputTemplate: "อัพเดตงาน {{title}} ของห้อง/ตึก {{place}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdIT + "/edit?usp=sharing",
     fieldMap: {
-        title: problemTitleColumnIndex,   // Column index for the problem title (1-based)
-        place: placeColumnIndex,             // Maps 'place' placeholder to the form field 'Place'
-        status: statusColumnIndex   // Column index for the status (1-based)
+        title: 2,
+        place: 4,
+        status: 9
     },
-    targetColumn: statusColumnIndex, // The column index that triggers the strategy (1-based)
-    sheetId: PropertiesService.getScriptProperties().getProperty('SHEET_ID'), // The ID of the Google Sheet
-    sheetName: PropertiesService.getScriptProperties().getProperty('SHEET_NAME') // The name of the Google Sheet
+    targetColumn: 9,
+    sheetId: sheetIdIT,
+    sheetName: sheetNameIT
+};
+
+const itSupportLineConfig = {
+    token: token,
+    groupId: groupIdIT
+};
+
+const cleaningServiceFormConfig = {
+    outputTemplate: "ได้รับการแจ้งต่อแผนกแม่บ้าน: {{title}} ที่: {{room}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdCleaning + "/edit?usp=sharing",
+    fieldMap: {
+        title: "B1",
+        room: "C1"
+    },
+    sheetId: sheetIdCleaning,
+    sheetName: sheetNameCleaning,
+    formId: formIdCleaning
+};
+
+const cleaningServiceUpdateSheetConfig = {
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{place}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdCleaning + "/edit?usp=sharing",
+    fieldMap: {
+        title: 2,
+        place: 3,
+        status: 6
+    },
+    targetColumn: 6,
+    sheetId: sheetIdCleaning,
+    sheetName: sheetNameCleaning
+};
+
+const cleaningServiceLineConfig = {
+    token: token,
+    groupId: groupIdCleaning
+};
+
+const facilityServiceFormConfig = {
+    outputTemplate: "ได้รับการแจ้งต่อฝ่ายอาคารสถานที่: {{title}} ที่: {{place}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
+    fieldMap: {
+        title: "G1",
+        place: "H1",
+        requester: "D1"
+    },
+    sheetId: sheetIdCleaning,
+    sheetName: sheetNameCleaning,
+    formId: formIdCleaning
+};
+
+const facilityServiceUpdateSheetConfig = {
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{place}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
+    fieldMap: {
+        title: 7,
+        place: 8,
+        status: 14
+    },
+    targetColumn: 14,
+    sheetId: sheetIdFacility,
+    sheetName: sheetNameFacility
+};
+
+const facilityServiceLineConfig = {
+    token: token,
+    groupId: groupIdFacility
+};
+
+const irServiceFormConfig = {
+    outputTemplate: "ได้รับการแจ้งต่อฝ่าย IR: {{title}} รายละเอียด: {{info}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheedIdIR + "/edit?usp=sharing",
+    fieldMap: {
+        title: "B1",
+        info: "C1",
+        requester: "H1"
+    },
+    sheetId: sheedIdIR,
+    sheetName: sheetNameIR,
+    formId: formIdIR
+};
+
+const irServiceUpdateSheetConfig = {
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{info}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheedIdIR + "/edit?usp=sharing",
+    fieldMap: {
+        title: 2,
+        info: 3,
+        status: 9
+    },
+    targetColumn: 9,
+    sheetId: sheedIdIR,
+    sheetName: sheetNameIR
+};
+
+const irServiceLineConfig = {
+    token: token,
+    groupId: groupIdIR
 };
