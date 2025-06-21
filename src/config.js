@@ -22,7 +22,7 @@ const formIdIR = PropertiesService.getScriptProperties().getProperty('FORM_ID_IR
 const groupIdIR = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_IR');
 
 const itSupportFormConfig = {
-    outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}",
+    outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdIT + "/edit?usp=sharing",
     fieldMap: {
         title: 'B1',
         room: 'D1'
@@ -33,7 +33,7 @@ const itSupportFormConfig = {
 };
 
 const itSupportUpdateSheetConfig = {
-    outputTemplate: "อัพเดตงาน {{title}} ของห้อง/ตึก {{place}} เป็นสถานะ {{status}}",
+    outputTemplate: "อัพเดตงาน {{title}} ของห้อง/ตึก {{place}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdIT + "/edit?usp=sharing",
     fieldMap: {
         title: 2,
         place: 4,
@@ -50,7 +50,7 @@ const itSupportLineConfig = {
 };
 
 const cleaningServiceFormConfig = {
-    outputTemplate: "ได้รับการแจ้งต่อแผนกแม่บ้าน: {{title}} ที่: {{room}}",
+    outputTemplate: "ได้รับการแจ้งต่อแผนกแม่บ้าน: {{title}} ที่: {{room}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdCleaning + "/edit?usp=sharing",
     fieldMap: {
         title: "B1",
         room: "C1"
@@ -61,7 +61,7 @@ const cleaningServiceFormConfig = {
 };
 
 const cleaningServiceUpdateSheetConfig = {
-    outputTemplate: "อัพเดตงาน {{title}} ที่ {{place}} เป็นสถานะ {{status}}",
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{place}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdCleaning + "/edit?usp=sharing",
     fieldMap: {
         title: 2,
         place: 3,
@@ -78,7 +78,7 @@ const cleaningServiceLineConfig = {
 };
 
 const facilityServiceFormConfig = {
-    outputTemplate: "ได้รับการแจ้งต่อฝ่ายอาคารสถานที่: {{title}} ที่: {{place}}} โดย: {{requester}}",
+    outputTemplate: "ได้รับการแจ้งต่อฝ่ายอาคารสถานที่: {{title}} ที่: {{place}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
     fieldMap: {
         title: "G1",
         place: "H1",
@@ -90,7 +90,7 @@ const facilityServiceFormConfig = {
 };
 
 const facilityServiceUpdateSheetConfig = {
-    outputTemplate: "อัพเดตงาน {{title}} ที่ {{place}} เป็นสถานะ {{status}}",
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{place}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
     fieldMap: {
         title: 7,
         place: 8,
@@ -107,7 +107,7 @@ const facilityServiceLineConfig = {
 };
 
 const irServiceFormConfig = {
-    outputTemplate: "ได้รับการแจ้งต่อฝ่าย IR: {{title}} รายละเอียด: {{info}}} โดย: {{requester}}",
+    outputTemplate: "ได้รับการแจ้งต่อฝ่าย IR: {{title}} รายละเอียด: {{info}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheedIdIR + "/edit?usp=sharing",
     fieldMap: {
         title: "B1",
         info: "C1",
@@ -119,7 +119,7 @@ const irServiceFormConfig = {
 };
 
 const irServiceUpdateSheetConfig = {
-    outputTemplate: "อัพเดตงาน {{title}} ที่ {{info}} เป็นสถานะ {{status}}",
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{info}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheedIdIR + "/edit?usp=sharing",
     fieldMap: {
         title: 2,
         info: 3,
