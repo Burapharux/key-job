@@ -21,6 +21,16 @@ const sheetNameIR = PropertiesService.getScriptProperties().getProperty('SHEET_N
 const formIdIR = PropertiesService.getScriptProperties().getProperty('FORM_ID_IR');
 const groupIdIR = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_IR');
 
+const sheetIdMeeting = PropertiesService.getScriptProperties().getProperty('SHEET_ID_MEETING');
+const sheetNameMeeting = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_MEETING');
+const formIdMeeting = PropertiesService.getScriptProperties().getProperty('FORM_ID_MEETING');
+const groupIdMeeting = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_MEETING');
+
+const sheetIdLogistics = PropertiesService.getScriptProperties().getProperty('SHEET_ID_LOGISTICS');
+const sheetNameLogistics = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_LOGISTICS');
+const formIdLogistics = PropertiesService.getScriptProperties().getProperty('FORM_ID_LOGISTICS');
+const groupIdLogistics = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_LOGISTICS');
+
 const itSupportFormConfig = {
     outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdIT + "/edit?usp=sharing",
     fieldMap: {
@@ -133,4 +143,62 @@ const irServiceUpdateSheetConfig = {
 const irServiceLineConfig = {
     token: token,
     groupId: groupIdIR
+};
+
+const meetingServiceFormConfig = {
+    outputTemplate: "ได้รับการแจ้งต่อฝ่ายประชุม: {{title}} รายละเอียด: {{info}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdMeeting + "/edit?usp=sharing",
+    fieldMap: {
+        title: "B1",
+        info: "C1",
+        requester: "K1"
+    },
+    sheetId: sheetIdMeeting,
+    sheetName: sheetNameMeeting,
+    formId: formIdMeeting
+};
+
+const meetingServiceUpdateSheetConfig = {
+    outputTemplate: "อัพเดตการจอง {{title}} ที่ {{info}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdMeeting + "/edit?usp=sharing",
+    fieldMap: {
+        title: 2,
+        info: 3,
+        status: 11
+    },
+    targetColumn: 11,
+    sheetId: sheetIdMeeting,
+    sheetName: sheetNameMeeting
+};  
+
+const meetingServiceLineConfig = {
+    token: token,
+    groupId: groupIdMeeting
+};
+
+const logisticsServiceFormConfig = {
+    outputTemplate: "ได้รับการจอง: {{title}} วันที่: {{date}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdMeeting + "/edit?usp=sharing",
+    fieldMap: {
+        title: "B1",
+        date: "C1",
+        requester: "E1"
+    },
+    sheetId: sheetIdMeeting,
+    sheetName: sheetNameMeeting,
+    formId: formIdMeeting
+};
+
+const logisticsServiceUpdateSheetConfig = {
+    outputTemplate: "อัพเดตการจอง {{title}} วันที่ {{date}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdMeeting + "/edit?usp=sharing",
+    fieldMap: {
+        title: 2,
+        date: 3,
+        status: 6
+    },
+    targetColumn: 6,
+    sheetId: sheetIdMeeting,
+    sheetName: sheetNameMeeting
+};
+
+const logisticsServiceLineConfig = {
+    token: token,
+    groupId: groupIdMeeting
 };
