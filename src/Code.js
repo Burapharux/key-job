@@ -68,6 +68,39 @@ function createIRserviceFormSubmitTrigger() {
   console.log("Ran the createIRserviceFormSubmitTrigger");
 }
 
+function createMeetingServiceSheetEditTrigger() {
+  ScriptApp.newTrigger('onEditMeetingServiceTriggerHandler')
+    .forSpreadsheet(SpreadsheetApp.openById(meetingServiceUpdateSheetConfig.sheetId))
+    .onEdit()
+    .create();
+  Logger.log('Trigger created successfully.');
+}
+
+function createMeetingRoomFormSubmitTrigger() {
+  ScriptApp.newTrigger("onFormSubmitMeetingServiceTriggerHandler")
+    .forForm(FormApp.openById(meetingServiceFormConfig.formId))
+    .onFormSubmit()
+    .create();
+  console.log("Ran the createMeetingRoomFormSubmitTrigger");
+}
+
+function createLogisticsServiceSheetEditTrigger() {
+  ScriptApp.newTrigger('onEditLogisticsServiceTriggerHandler')
+    .forSpreadsheet(SpreadsheetApp.openById(logisticsServiceUpdateSheetConfig.sheetId))
+    .onEdit()
+    .create();
+  Logger.log('Trigger created successfully.');
+}
+
+function createLogisticsServiceFormSubmitTrigger() {
+  ScriptApp.newTrigger("onFormSubmitLogisticsServiceTriggerHandler")
+    .forForm(FormApp.openById(logisticsServiceFormConfig.formId))
+    .onFormSubmit()
+    .create();
+  console.log("Ran the createLogisticsServiceFormSubmitTrigger");
+}
+
+
 // Initialize notifiers and subscribers
 // Do not hesitate to modify this function if more subscribers are needed
 function setUpNotifiers(token, groupId) {
@@ -126,6 +159,30 @@ function onEditIRServiceTriggerHandler(e) {
   notifier.executeStrategy(e);
 }
 
+function onEditMeetingServiceTriggerHandler(e) {
+  setUpNotifiers(meetingServiceLineConfig.token, meetingServiceLineConfig.groupId);
+  notifier.setStrategy(new UpdateSheetStrategy(meetingServiceUpdateSheetConfig));
+  notifier.executeStrategy(e);
+}
+
+function onFormSubmitMeetingServiceTriggerHandler(e) {
+  setUpNotifiers(meetingServiceLineConfig.token, meetingServiceLineConfig.groupId);
+  notifier.setStrategy(new NewFormSubmissionStrategy(meetingServiceFormConfig));
+  notifier.executeStrategy(e);
+}
+
+function onEditLogisticsServiceTriggerHandler(e) {
+  setUpNotifiers(logisticsServiceLineConfig.token, logisticsServiceLineConfig.groupId);
+  notifier.setStrategy(new UpdateSheetStrategy(logisticsServiceUpdateSheetConfig));
+  notifier.executeStrategy(e);
+}
+
+function onFormSubmitLogisticsServiceTriggerHandler(e) {
+  setUpNotifiers(logisticsServiceLineConfig.token, logisticsServiceLineConfig.groupId);
+  notifier.setStrategy(new NewFormSubmissionStrategy(logisticsServiceFormConfig));
+  notifier.executeStrategy(e);
+}
+
 // Setup function to initialize everything
 function setup() {
   // Delete existing triggers to avoid duplicates
@@ -141,5 +198,9 @@ function setup() {
   createFacilityServiceSheetEditTrigger();
   createIRserviceFormSubmitTrigger();
   createIRserviceSheetEditTrigger();
+  createMeetingRoomFormSubmitTrigger();
+  createMeetingServiceSheetEditTrigger();
+  createLogisticsServiceFormSubmitTrigger();
+  createLogisticsServiceSheetEditTrigger();
   console.log("Setup completed. Triggers created for form submission and onEdit events.");
 }
