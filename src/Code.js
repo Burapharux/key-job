@@ -8,7 +8,7 @@ function createItServiceFormSubmitTrigger() {
     .forForm(FormApp.openById(itSupportFormConfig.formId))
     .onFormSubmit()
     .create();
-  console.log("Ran the createFormSubmitTrigger");
+  Logger.log("Ran the createFormSubmitTrigger");
 }
 
 // Setup a trigger for sheet edit
@@ -25,7 +25,7 @@ function createCleaningServiceFormSubmitTrigger() {
     .forForm(FormApp.openById(cleaningServiceFormConfig.formId))
     .onFormSubmit()
     .create();
-  console.log("Ran the createCleaningServiceFormSubmitTrigger");
+  Logger.log("Ran the createCleaningServiceFormSubmitTrigger");
 }
 
 function createCleaningServiceSheetEditTrigger() {
@@ -41,7 +41,7 @@ function createFacilityServiceFormSubmitTrigger() {
     .forForm(FormApp.openById(facilityServiceFormConfig.formId))
     .onFormSubmit()
     .create();
-  console.log("Ran the createFacilityServiceFormSubmitTrigger");
+  Logger.log("Ran the createFacilityServiceFormSubmitTrigger");
 }
 
 function createFacilityServiceSheetEditTrigger() {
@@ -65,7 +65,7 @@ function createIRserviceFormSubmitTrigger() {
     .forForm(FormApp.openById(irServiceFormConfig.formId))
     .onFormSubmit()
     .create();
-  console.log("Ran the createIRserviceFormSubmitTrigger");
+  Logger.log("Ran the createIRserviceFormSubmitTrigger");
 }
 
 function createMeetingServiceSheetEditTrigger() {
@@ -81,7 +81,7 @@ function createMeetingRoomFormSubmitTrigger() {
     .forForm(FormApp.openById(meetingServiceFormConfig.formId))
     .onFormSubmit()
     .create();
-  console.log("Ran the createMeetingRoomFormSubmitTrigger");
+  Logger.log("Ran the createMeetingRoomFormSubmitTrigger");
 }
 
 function createLogisticsServiceSheetEditTrigger() {
@@ -97,7 +97,7 @@ function createLogisticsServiceFormSubmitTrigger() {
     .forForm(FormApp.openById(logisticsServiceFormConfig.formId))
     .onFormSubmit()
     .create();
-  console.log("Ran the createLogisticsServiceFormSubmitTrigger");
+  Logger.log("Ran the createLogisticsServiceFormSubmitTrigger");
 }
 
 
@@ -202,5 +202,5 @@ function setup() {
   createMeetingServiceSheetEditTrigger();
   createLogisticsServiceFormSubmitTrigger();
   createLogisticsServiceSheetEditTrigger();
-  console.log("Setup completed. Triggers created for form submission and onEdit events.");
+  Logger.log("Setup completed. Triggers created for form submission and onEdit events.");
 }

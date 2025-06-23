@@ -88,25 +88,31 @@ const cleaningServiceLineConfig = {
 };
 
 const facilityServiceFormConfig = {
-    outputTemplate: "ได้รับการแจ้งต่อฝ่ายอาคารสถานที่: {{title}} ที่: {{place}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
+    outputTemplate: "ได้รับงานใหม่ {{title}} ที่ห้อง {{room}} ชั้น {{floor}} ตึก {{building}} สาขา {{branch}} มีความเร่งด่วน {{urgency}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
     fieldMap: {
-        title: "G1",
-        place: "H1",
-        requester: "D1"
+        title: "E1",
+        room: "M1",
+        floor: "L1",
+        building: "K1",
+        branch: "J1",
+        urgency: "N1"
     },
-    sheetId: sheetIdCleaning,
-    sheetName: sheetNameCleaning,
-    formId: formIdCleaning
+    sheetId: sheetIdFacility,
+    sheetName: sheetNameFacility,
+    formId: formIdFacility
 };
 
 const facilityServiceUpdateSheetConfig = {
-    outputTemplate: "อัพเดตงาน {{title}} ที่ {{place}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
+    outputTemplate: "อัพเดตงาน {{title}} ที่ห้อง {{room}} ชั้น {{floor}} ตึก {{building}} สาขา {{branch}} ได้ถูกรับแจ้งโดย {{responsible}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
     fieldMap: {
         title: 7,
-        place: 8,
-        status: 14
+        room: 15,
+        floor: 14,
+        building: 13,
+        branch: 12,
+        responsible: 18
     },
-    targetColumn: 14,
+    targetColumn: 18,
     sheetId: sheetIdFacility,
     sheetName: sheetNameFacility
 };
