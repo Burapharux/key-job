@@ -200,5 +200,7 @@ function setup() {
   createIRserviceSheetEditTrigger();
   createMeetingRoomFormSubmitTrigger();
   createMeetingServiceSheetEditTrigger();
+  createLogisticsServiceFormSubmitTrigger();
+  createLogisticsServiceSheetEditTrigger();
   console.log("Setup completed. Triggers created for form submission and onEdit events.");
 }
