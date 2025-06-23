@@ -175,27 +175,27 @@ const meetingServiceLineConfig = {
 };
 
 const logisticsServiceFormConfig = {
-    outputTemplate: "ได้รับการจอง: {{title}} วันที่: {{date}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdMeeting + "/edit?usp=sharing",
+    outputTemplate: "ได้รับการจอง: {{title}} วันที่: {{date}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdLogistics + "/edit?usp=sharing",
     fieldMap: {
         title: "B1",
         date: "C1",
         requester: "E1"
     },
-    sheetId: sheetIdMeeting,
-    sheetName: sheetNameMeeting,
-    formId: formIdMeeting
+    sheetId: sheetIdLogistics,
+    sheetName: sheetNameLogistics,
+    formId: formIdLogistics
 };
 
 const logisticsServiceUpdateSheetConfig = {
-    outputTemplate: "อัพเดตการจอง {{title}} วันที่ {{date}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdMeeting + "/edit?usp=sharing",
+    outputTemplate: "อัพเดตการจอง {{title}} วันที่ {{date}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdLogistics + "/edit?usp=sharing",
     fieldMap: {
         title: 2,
         date: 3,
         status: 6
     },
     targetColumn: 6,
-    sheetId: sheetIdMeeting,
-    sheetName: sheetNameMeeting
+    sheetId: sheetIdLogistics,
+    sheetName: sheetNameLogistics
 };
 
 const logisticsServiceLineConfig = {
