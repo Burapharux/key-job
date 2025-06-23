@@ -146,7 +146,7 @@ const irServiceLineConfig = {
 };
 
 const meetingServiceFormConfig = {
-    outputTemplate: "ได้รับการแจ้งต่อฝ่ายประชุม: {{title}} รายละเอียด: {{info}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdMeeting + "/edit?usp=sharing",
+    outputTemplate: "ได้รับการแจ้งต่อฝ่ายประชุม: {{title}} รายละเอียด: {{info}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdMeeting + "/edit?usp=sharing",
     fieldMap: {
         title: "B1",
         info: "C1",
