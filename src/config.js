@@ -105,14 +105,14 @@ const facilityServiceFormConfig = {
 const facilityServiceUpdateSheetConfig = {
     outputTemplate: "อัพเดตงาน {{title}} ที่ห้อง {{room}} ชั้น {{floor}} ตึก {{building}} สาขา {{branch}} ได้ถูกรับแจ้งโดย {{responsible}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
     fieldMap: {
-        title: 7,
-        room: 15,
-        floor: 14,
-        building: 13,
-        branch: 12,
-        responsible: 18
+        title: 6,
+        room: 13,
+        floor: 12,
+        building: 11,
+        branch: 10,
+        responsible: 17
     },
-    targetColumn: 18,
+    targetColumn: 17,
     sheetId: sheetIdFacility,
     sheetName: sheetNameFacility
 };
