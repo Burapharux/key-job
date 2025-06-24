@@ -178,7 +178,7 @@ function setup() {
   createItServiceFormSubmitTrigger();
   createItServiceSheetEditTrigger();
   createFacilityServiceFormSubmitTrigger();
-  // createFacilityServiceSheetEditTrigger();
+  createFacilityServiceSheetEditTrigger();
   createIRserviceFormSubmitTrigger();
   createIRserviceSheetEditTrigger();
   createMeetingRoomFormSubmitTrigger();
