@@ -208,11 +208,13 @@ const logisticsServiceUpdateSheetConfig = {
 };
 
 const logisticsServiceFormToCalendarConfig = {
-    outputTemplate: "{{title}}|{{startDate}} {{startTime}}",
+    outputTemplate: "{{title}}|{{startDate}} {{startTime}}|{{requester}}",
+    // Assuming startDate and startTime are in the format "YYYY-MM-DD" and "HH:mm"
     fieldMap: {
         title: "B1",
         startDate: "C1",
-        startTime: "D1"
+        startTime: "D1",
+        requester: "E1"
     },
     sheetId: sheetIdLogistics,
     sheetName: sheetNameLogistics,
