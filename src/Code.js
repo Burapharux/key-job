@@ -159,6 +159,11 @@ function onFormSubmitLogisticsServiceTriggerHandler(e) {
   setUpNotifiers(logisticsServiceLineConfig.token, logisticsServiceLineConfig.groupId);
   notifier.setStrategy(new NewFormSubmissionStrategy(logisticsServiceFormConfig));
   notifier.executeStrategy(e);
+  // Notify the calendar subscriber separately
+  const calendarNotifier = new Notifier();
+  calendarNotifier.subscribe(new CalendarSubscriber(logisticsServiceFormToCalendarConfig.calendarId));
+  calendarNotifier.setStrategy(new NewFormSubmissionStrategy(logisticsServiceFormToCalendarConfig));
+  calendarNotifier.executeStrategy(e);
 }
 function onEditLogisticsServiceTriggerHandler(e) {
   setUpNotifiers(logisticsServiceLineConfig.token, logisticsServiceLineConfig.groupId);

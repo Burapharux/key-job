@@ -30,6 +30,8 @@ const sheetIdLogistics = PropertiesService.getScriptProperties().getProperty('SH
 const sheetNameLogistics = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_LOGISTICS');
 const formIdLogistics = PropertiesService.getScriptProperties().getProperty('FORM_ID_LOGISTICS');
 const groupIdLogistics = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_LOGISTICS');
+const calendarIdLogistics = PropertiesService.getScriptProperties().getProperty('CALENDAR_ID_LOGISTICS');
+
 
 const itSupportFormConfig = {
     outputTemplate: "ได้รับการแจ้งซ่อมต่อแผนกไอที: {{title}} ที่ห้อง/ตึก: {{room}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdIT + "/edit?usp=sharing",
@@ -203,6 +205,21 @@ const logisticsServiceUpdateSheetConfig = {
     targetColumn: 6,
     sheetId: sheetIdLogistics,
     sheetName: sheetNameLogistics
+};
+
+const logisticsServiceFormToCalendarConfig = {
+    outputTemplate: "{{title}}|{{startDate}} {{startTime}}|{{requester}}",
+    // Assuming startDate and startTime are in the format "YYYY-MM-DD" and "HH:mm"
+    fieldMap: {
+        title: "B1",
+        startDate: "C1",
+        startTime: "D1",
+        requester: "E1"
+    },
+    sheetId: sheetIdLogistics,
+    sheetName: sheetNameLogistics,
+    formId: formIdLogistics,
+    calendarId: calendarIdLogistics
 };
 
 const logisticsServiceLineConfig = {

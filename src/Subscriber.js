@@ -41,3 +41,32 @@ class LineSubscriber extends Subscriber {
     }
   }
 }
+
+class CalendarSubscriber extends Subscriber {
+  constructor(calendarId) {
+    super();
+    this.calendarId = calendarId;
+  }
+
+  sendMessage(message) {
+    const calendar = CalendarApp.getCalendarById(this.calendarId);
+    if (!calendar) {
+      Logger.log('Calendar not found: ' + this.calendarId);
+      return;
+    }
+    
+    // Assuming message is a string with event details
+    const parts = message.split('|');
+    if (parts.length !== 3) {
+      Logger.log('Malformed message format: ' + message);
+      return;
+    }
+    
+    const [title, startTime, requester] = parts;
+    const start = new Date(startTime);
+    const end = new Date(start.getTime() + 30 * 60 * 1000);
+    
+    calendar.createEvent(title, start, end, {description: "ชื่อผู้จอง//หน่วยงาน: " + requester});
+    Logger.log('Event created: ' + title);
+  }
+}
