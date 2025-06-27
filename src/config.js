@@ -16,7 +16,7 @@ const sheetNameFacility = PropertiesService.getScriptProperties().getProperty('S
 const formIdFacility = PropertiesService.getScriptProperties().getProperty('FORM_ID_FACILITY');
 const groupIdFacility = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_FACILITY');
 
-const sheedIdIR = PropertiesService.getScriptProperties().getProperty('SHEET_ID_IR');
+const sheetIdIR = PropertiesService.getScriptProperties().getProperty('SHEET_ID_IR');
 const sheetNameIR = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_IR');
 const formIdIR = PropertiesService.getScriptProperties().getProperty('FORM_ID_IR');
 const groupIdIR = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_IR');
@@ -88,14 +88,15 @@ const cleaningServiceLineConfig = {
 };
 
 const facilityServiceFormConfig = {
-    outputTemplate: "ได้รับงานใหม่ {{title}} ที่ห้อง {{room}} ชั้น {{floor}} ตึก {{building}} สาขา {{branch}} มีความเร่งด่วน {{urgency}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
+    outputTemplate: "ได้รับงานใหม่ {{title}} ที่ห้อง {{room}} ชั้น {{floor}} ตึก {{building}} สาขา {{branch}} แจ้งโดย {{requester}} มีความเร่งด่วน {{urgency}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdFacility + "/edit?usp=sharing",
     fieldMap: {
         title: "E1",
         room: "M1",
         floor: "L1",
         building: "K1",
         branch: "J1",
-        urgency: "N1"
+        urgency: "N1",
+        requester: "F1"
     },
     sheetId: sheetIdFacility,
     sheetName: sheetNameFacility,
@@ -123,26 +124,26 @@ const facilityServiceLineConfig = {
 };
 
 const irServiceFormConfig = {
-    outputTemplate: "ได้รับการแจ้งต่อฝ่าย IR: {{title}} รายละเอียด: {{info}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheedIdIR + "/edit?usp=sharing",
+    outputTemplate: "ได้รับการแจ้งต่อฝ่าย IR: {{title}} รายละเอียด: {{info}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdIR + "/edit?usp=sharing",
     fieldMap: {
         title: "B1",
         info: "C1",
         requester: "H1"
     },
-    sheetId: sheedIdIR,
+    sheetId: sheetIdIR,
     sheetName: sheetNameIR,
     formId: formIdIR
 };
 
 const irServiceUpdateSheetConfig = {
-    outputTemplate: "อัพเดตงาน {{title}} ที่ {{info}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheedIdIR + "/edit?usp=sharing",
+    outputTemplate: "อัพเดตงาน {{title}} ที่ {{info}} เป็นสถานะ {{status}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdIR + "/edit?usp=sharing",
     fieldMap: {
         title: 2,
         info: 3,
         status: 9
     },
     targetColumn: 9,
-    sheetId: sheedIdIR,
+    sheetId: sheetIdIR,
     sheetName: sheetNameIR
 };
 
@@ -181,7 +182,7 @@ const meetingServiceLineConfig = {
 };
 
 const logisticsServiceFormConfig = {
-    outputTemplate: "ได้รับการจอง: {{title}} วันที่: {{date}}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdLogistics + "/edit?usp=sharing",
+    outputTemplate: "ได้รับการจอง: {{title}} วันที่: {{date}} โดย: {{requester}}\n"+"https://docs.google.com/spreadsheets/d/" + sheetIdLogistics + "/edit?usp=sharing",
     fieldMap: {
         title: "B1",
         date: "C1",
@@ -206,5 +207,5 @@ const logisticsServiceUpdateSheetConfig = {
 
 const logisticsServiceLineConfig = {
     token: token,
-    groupId: groupIdMeeting
+    groupId: groupIdLogistics
 };
