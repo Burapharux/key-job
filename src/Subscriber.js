@@ -56,7 +56,13 @@ class CalendarSubscriber extends Subscriber {
     }
     
     // Assuming message is a string with event details
-    const [title, startTime, requester] = message.split('|');
+    const parts = message.split('|');
+    if (parts.length !== 3) {
+      Logger.log('Malformed message format: ' + message);
+      return;
+    }
+    
+    const [title, startTime, requester] = parts;
     const start = new Date(startTime);
     const end = new Date(start.getTime() + 30 * 60 * 1000);
     
