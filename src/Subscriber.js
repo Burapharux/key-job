@@ -41,3 +41,26 @@ class LineSubscriber extends Subscriber {
     }
   }
 }
+
+class CalendarSubscriber extends Subscriber {
+  constructor(calendarId) {
+    super();
+    this.calendarId = calendarId;
+  }
+
+  sendMessage(message) {
+    const calendar = CalendarApp.getCalendarById(this.calendarId);
+    if (!calendar) {
+      Logger.log('Calendar not found: ' + this.calendarId);
+      return;
+    }
+    
+    // Assuming message is a string with event details
+    const [title, startTime, endTime] = message.split('|');
+    const start = new Date(startTime);
+    const end = new Date(endTime);
+    
+    calendar.createEvent(title, start, end);
+    Logger.log('Event created: ' + title);
+  }
+}
