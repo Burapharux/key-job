@@ -56,9 +56,9 @@ class CalendarSubscriber extends Subscriber {
     }
     
     // Assuming message is a string with event details
-    const [title, startTime, endTime] = message.split('|');
+    const [title, startTime] = message.split('|');
     const start = new Date(startTime);
-    const end = new Date(endTime);
+    const end = new Date(startTime.getTime() + 30 * 60 * 1000);
     
     calendar.createEvent(title, start, end);
     Logger.log('Event created: ' + title);

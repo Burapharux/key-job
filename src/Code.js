@@ -81,6 +81,11 @@ function onFormSubmitFacilityServiceTriggerHandler(e) {
   setUpNotifiers(facilityServiceLineConfig.token, facilityServiceLineConfig.groupId);
   notifier.setStrategy(new NewFormSubmissionStrategy(facilityServiceFormConfig));
   notifier.executeStrategy(e);
+  // Notify the calendar subscriber separately
+  const calendarNotifier = new Notifier();
+  calendarNotifier.subscribe(new CalendarSubscriber(facilityServiceFormToCalendarConfig.calendarId));
+  calendarNotifier.setStrategy(new NewFormSubmissionStrategy(facilityServiceFormToCalendarConfig));
+  calendarNotifier.executeStrategy(e);
 }
 function onEditFacilityServiceTriggerHandler(e) {
   setUpNotifiers(facilityServiceLineConfig.token, facilityServiceLineConfig.groupId);

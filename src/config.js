@@ -15,6 +15,7 @@ const sheetIdFacility = PropertiesService.getScriptProperties().getProperty('SHE
 const sheetNameFacility = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_FACILITY');
 const formIdFacility = PropertiesService.getScriptProperties().getProperty('FORM_ID_FACILITY');
 const groupIdFacility = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_FACILITY');
+const calendarIdFacility = PropertiesService.getScriptProperties().getProperty('CALENDAR_ID_FACILITY');
 
 const sheetIdIR = PropertiesService.getScriptProperties().getProperty('SHEET_ID_IR');
 const sheetNameIR = PropertiesService.getScriptProperties().getProperty('SHEET_NAME_IR');
@@ -203,6 +204,19 @@ const logisticsServiceUpdateSheetConfig = {
     targetColumn: 6,
     sheetId: sheetIdLogistics,
     sheetName: sheetNameLogistics
+};
+
+const logisticsServiceFormToCalendarConfig = {
+    outputTemplate: "{{title}}|{{startDate}} {{startTime}}",
+    fieldMap: {
+        title: "B1",
+        startDate: "C1",
+        startTime: "D1"
+    },
+    sheetId: sheetIdlogistics,
+    sheetName: sheetNameFacility,
+    formId: formIdFacility,
+    calendarId: calendarIdFacility
 };
 
 const logisticsServiceLineConfig = {
