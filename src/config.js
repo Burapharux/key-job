@@ -1,4 +1,5 @@
 const token = PropertiesService.getScriptProperties().getProperty('LINE_CHANNEL_ACCESS_TOKEN');
+const tokenIt = PropertiesService.getScriptProperties().getProperty('LINE_ACCESS_TOKEN_IT');
 const groupIdIT = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_IT');
 const groupIdCleaning = PropertiesService.getScriptProperties().getProperty('LINE_GROUP_ID_CLEANING');
 
@@ -57,7 +58,7 @@ const itSupportUpdateSheetConfig = {
 };
 
 const itSupportLineConfig = {
-    token: token,
+    token: tokenIt,
     groupId: groupIdIT
 };
 
