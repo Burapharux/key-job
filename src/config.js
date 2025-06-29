@@ -160,7 +160,7 @@ const meetingServiceFormConfig = {
     fieldMap: {
         title: "B1",
         info: "C1",
-        requester: "K1"
+        requester: "J1"
     },
     sheetId: sheetIdMeeting,
     sheetName: sheetNameMeeting,
